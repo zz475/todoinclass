@@ -2,25 +2,61 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Todo App</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   </head>
+
   <body>
     <div id="app">
       <div class="container">
         <h1>Todo App</h1>
-        <form class="todo-form">
-        <input type="text" id="todo-input" placeholder="Enter a new todo">  
-        <button type="submit">Add Todo</button>
-      </form>
-      
-      <div id="error-message" class="error-message"> whatever
 
-      </div>
-      <ul class="todo-list"></ul>
+       
+        <form class="todo-form">
+          <input 
+            type="text" 
+            id="todo-input" 
+            placeholder="Enter a new todo"
+          />
+          <input 
+            type="date" 
+            id="todo-date" 
+            class="todo-date"
+            title="Select due date"
+          />
+          <button type="submit">Add Todo</button>
+        </form>
+
+        
+        <p id="error-message" class="error-message" style="display: none;">
+          Please enter a todo item.
+        </p>
+
+       
+        <ul id="todo-list" class="todo-list"></ul>
+
+       
+        <div class="controls">
+          <button id="clear-completed-btn">Clear Completed</button>
+          <p id="task-counter">Tasks remaining: 0</p>
+        </div>
+
+       
+        <div class="progress-container">
+          <label for="progress-bar" class="progress-label">Progress:</label>
+          <progress id="progress-bar" value="0" max="100"></progress>
+          <span id="progress-text">0%</span>
+        </div>
+
+       
+        <div class="color-picker-container">
+          <label for="colorPicker">Background color:</label>
+          <input type="color" id="colorPicker" value="#ffffff" />
+        </div>
       </div>
     </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
