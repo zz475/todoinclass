@@ -12,44 +12,46 @@
       <div class="container">
         <h1>Todo App</h1>
 
-       
+        <!-- Todo Input Form -->
         <form class="todo-form">
           <input 
             type="text" 
             id="todo-input" 
             placeholder="Enter a new todo"
+            aria-label="Todo input field"
           />
           <input 
             type="date" 
             id="todo-date" 
             class="todo-date"
             title="Select due date"
+            aria-label="Select due date"
           />
           <button type="submit">Add Todo</button>
         </form>
 
-        
+        <!-- Error message -->
         <p id="error-message" class="error-message" style="display: none;">
           Please enter a todo item.
         </p>
 
-       
+        <!-- Todo List -->
         <ul id="todo-list" class="todo-list"></ul>
 
-       
+        <!-- Controls -->
         <div class="controls">
           <button id="clear-completed-btn">Clear Completed</button>
           <p id="task-counter">Tasks remaining: 0</p>
         </div>
 
-       
+        <!-- Progress Bar -->
         <div class="progress-container">
           <label for="progress-bar" class="progress-label">Progress:</label>
           <progress id="progress-bar" value="0" max="100"></progress>
           <span id="progress-text">0%</span>
         </div>
 
-       
+        <!-- Color Picker -->
         <div class="color-picker-container">
           <label for="colorPicker">Background color:</label>
           <input type="color" id="colorPicker" value="#ffffff" />
