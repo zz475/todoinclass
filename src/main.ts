@@ -72,7 +72,7 @@ const renderTodos = (): void => {
           ${
             todo.dueDate
               ? `<small class="due-date" style="color:${dueDateColor}">
-                  📅 ${formattedDate}
+                   ${formattedDate}
                 </small>`
               : ''
           }
