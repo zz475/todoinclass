@@ -72,7 +72,7 @@ const renderTodos = (): void => {
           ${
             todo.dueDate
               ? `<small class="due-date" style="color:${dueDateColor}">
-                  📅 ${formattedDate}
+                  ${formattedDate}
                 </small>`
               : ''
           }
@@ -141,3 +141,6 @@ colorPicker.addEventListener('input', (e: Event): void => {
 })
 
 renderTodos()
+
+
+// minor UI cleanup and commit test
