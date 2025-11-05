@@ -72,8 +72,7 @@ const renderTodos = (): void => {
           ${
             todo.dueDate
               ? `<small class="due-date" style="color:${dueDateColor}">
-                  ${formattedDate}
-
+                   ${formattedDate}
                 </small>`
               : ''
           }
@@ -86,7 +85,6 @@ const renderTodos = (): void => {
     checkbox.addEventListener('change', () => {
       todo.completed = checkbox.checked
       todo.status = checkbox.checked ? 'completed' : 'pending'
-      updateTaskCounter()
       renderTodos()
     })
 
@@ -143,8 +141,5 @@ colorPicker.addEventListener('input', (e: Event): void => {
 
 renderTodos()
 
-
 // minor UI cleanup and commit test
-
 // test change in color picker branch
-
