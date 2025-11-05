@@ -1,16 +1,17 @@
 {
-    "private": true,
+  "name": "todoinclass",
+  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
-    "build": "tsc &&
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "devDependencies": {
-    "typescript": "~5.8.3",
-    "vite": "^7.1.2"
-    "vitest": "^"
+    "typescript": "^5.8.3",
+    "vite": "^7.1.2",
+    "vitest": "^4.0.7"
   }
 }

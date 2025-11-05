@@ -1,0 +1,44 @@
+name: TeamWorkflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  integration-delivery:
+    # NOTICE: We're no longer running ubuntu latest, since it has some issues with TestCafe. We have degraded to version 22.04 instead.
+    runs-on: ubuntu-22.04
+    environment: Test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js environment
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build website
+        run: npm run build
+
+      # FTP deploy step
+      - name: FTP delivery
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ vars.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/todo/
+          local-dir: dist/
+
+      # Run TestCafe tests
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome test/*"
