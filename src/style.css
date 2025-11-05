@@ -23,7 +23,7 @@
   --red: #dc3545;
   --gray-light: #f9f9f9;
   --gray-border: #ddd;
-  --text-color: #333;
+  --text-color: #222; /* slightly darker for better readability */
 }
 
 body {
@@ -46,17 +46,20 @@ body {
   width: var(--container-width);
 }
 
-
 h1 {
   text-align: center;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
+/* ------------------------------ */
+/* Todo Form */
+/* ------------------------------ */
 .todo-form {
   display: flex;
+  gap: 6px;
   justify-content: space-between;
-  gap: 8px;
+  flex-wrap: wrap;
   margin-bottom: 0.5rem;
 }
 
@@ -68,7 +71,19 @@ h1 {
   font-size: 0.95rem;
 }
 
+.todo-form input[type="text"] {
+  flex: 2;
+}
+
+.todo-form .todo-date {
+  flex: 1;
+  min-width: 120px;
+}
+
 .todo-form button {
+  flex: 0;
+  white-space: nowrap;
+  align-self: stretch;
   padding: 10px 14px;
   border: none;
   background: var(--green);
@@ -82,7 +97,9 @@ h1 {
   background: #218838;
 }
 
-
+/* ------------------------------ */
+/* Todo List */
+/* ------------------------------ */
 .todo-list {
   list-style: none;
   padding: 0;
@@ -118,14 +135,15 @@ h1 {
   background: #c82333;
 }
 
-
+/* ------------------------------ */
+/* Error Message & Controls */
+/* ------------------------------ */
 #error-message {
   color: var(--red);
   font-size: 0.9rem;
   margin-top: 5px;
   display: none;
 }
-
 
 #clear-completed-btn {
   margin-top: 8px;
@@ -141,13 +159,14 @@ h1 {
   background: #ccc;
 }
 
-
 #task-counter {
   margin-top: 10px;
   font-weight: 500;
 }
 
-
+/* ------------------------------ */
+/* Progress Bar */
+/* ------------------------------ */
 .progress-container {
   display: flex;
   align-items: center;
@@ -161,10 +180,17 @@ h1 {
   height: 10px;
   border-radius: 6px;
   accent-color: var(--green);
-  transition: all 0.4s ease-in-out; 
+  transition: all 0.4s ease-in-out;
 }
 
 #progress-bar::-webkit-progress-value {
+  transition: width 0.4s ease-in-out;
+}
+
+/* Firefox compatibility */
+#progress-bar::-moz-progress-bar {
+  background: var(--green);
+  border-radius: 6px;
   transition: width 0.4s ease-in-out;
 }
 
@@ -175,7 +201,9 @@ h1 {
   text-align: right;
 }
 
-
+/* ------------------------------ */
+/* Color Picker */
+/* ------------------------------ */
 .color-picker-container {
   display: flex;
   align-items: center;
@@ -203,26 +231,3 @@ h1 {
 #colorPicker::-webkit-color-swatch-wrapper {
   padding: 0;
 }
-
-.todo-form {
-  display: flex;
-  gap: 6px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.todo-form input[type="text"] {
-  flex: 2;
-}
-
-.todo-form .todo-date {
-  flex: 1;
-  min-width: 120px;
-}
-
-.todo-form button {
-  flex: 0;
-  white-space: nowrap;
-  align-self: stretch;
-}
-
