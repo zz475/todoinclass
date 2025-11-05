@@ -43,3 +43,6 @@ jobs:
       # 6️⃣ Run TestCafe tests
       - name: Run TestCafe Tests
         run: npx testcafe "chrome" "test/*.js"
+
+        # Triggering new workflow run
+
