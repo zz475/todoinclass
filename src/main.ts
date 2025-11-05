@@ -114,6 +114,23 @@ const updateTaskCounter = (): void => {
   const progress = total > 0 ? (completed / total) * 100 : 0
   progressBar.value = progress
   progressText.textContent = `${Math.round(progress)}%`
+
+  // 🎨 New feature: dynamic progress color + motivational message
+  if (progress === 0) {
+    progressBar.style.setProperty('--progress-color', '#d9534f') // red
+    progressText.textContent += ' — Let’s get started!'
+  } else if (progress < 50) {
+    progressBar.style.setProperty('--progress-color', '#f0ad4e') // orange
+    progressText.textContent += ' — Keep going!'
+  } else if (progress < 100) {
+    progressBar.style.setProperty('--progress-color', '#5bc0de') // blue
+    progressText.textContent += ' — Almost there!'
+  } else {
+    progressBar.style.setProperty('--progress-color', '#5cb85c') // green
+    progressText.textContent += ' — Great job! 🎉'
+  }
+
+  progressBar.style.background = `linear-gradient(to right, var(--progress-color) ${progress}%, #eee ${progress}%)`
 }
 
 const getDueDateColor = (dueDate?: string): string => {
@@ -142,4 +159,3 @@ colorPicker.addEventListener('input', (e: Event): void => {
 renderTodos()
 
 // minor UI cleanup and commit test
-// test change in color picker branch
