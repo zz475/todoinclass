@@ -11,25 +11,25 @@ jobs:
     environment: Test
 
     steps:
-      # 1️⃣ Checkout code
+      # 1️ Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node
+      # 2️ Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3️⃣ Install dependencies
+      # 3️ Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Build project
+      # 4️ Build your Vite site
       - name: Build website
         run: npm run build
 
-      # 5️⃣ Deploy with FTPS (correct for Simply.com)
+      # 5️ Deploy via FTPS (Simply.com config)
       - name: Deploy to Simply.com via FTPS
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
@@ -38,5 +38,13 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: public_html/todo/
           local-dir: dist/
-          protocol: ftps   
-          
+          protocol: ftps
+          port: 21
+          security: strict
+          timeout: 60000
+
+      # 6️ Run TestCafe tests
+      - name: Run TestCafe Tests
+        run: npx testcafe "chrome" "test/*.js"
+
+
