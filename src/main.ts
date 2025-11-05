@@ -73,7 +73,7 @@ const renderTodos = (): void => {
             todo.dueDate
               ? `<small class="due-date" style="color:${dueDateColor}">
                   ${formattedDate}
-                  
+
                 </small>`
               : ''
           }
@@ -145,3 +145,6 @@ renderTodos()
 
 
 // minor UI cleanup and commit test
+
+// test change in color picker branch
+
