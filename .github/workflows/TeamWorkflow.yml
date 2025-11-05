@@ -6,45 +6,38 @@ on:
       - main
 
 jobs:
-  integration-delivery:
+  deploy:
     runs-on: ubuntu-22.04
-    environment: Test
 
     steps:
-      # 1️ Checkout code
+      # 1. Checkout your code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️ Setup Node.js
-      - name: Setup Node
+      # 2. Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3️ Install dependencies
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4️ Build your Vite site
+      # 4. Build the Vite app
       - name: Build website
         run: npm run build
 
-      # 5️ Deploy via FTPS (Simply.com config)
-      - name: Deploy to Simply.com via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      # 5. Deploy to Simply.com via SFTP (using SSH key)
+      - name: Deploy to Simply.com
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ vars.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/todo/
-          local-dir: dist/
-          protocol: ftps
-          port: 21
-          security: strict
-          timeout: 60000
-
-      # 6️ Run TestCafe tests
-      - name: Run TestCafe Tests
-        run: npx testcafe "chrome" "test/*.js"
+          server: linux398.unoeuro.com
+          username: zararawashdeh.dk
+          port: 22
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: dist/*
+          remote_path: /public_html/
+          sftp_only: true
 
 
