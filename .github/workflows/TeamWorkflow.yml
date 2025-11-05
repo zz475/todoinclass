@@ -11,25 +11,25 @@ jobs:
     environment: Test
 
     steps:
-      # 1️⃣ Checkout your repository
+      # Checkout your repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Node.js
+      # Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3️⃣ Install dependencies
+      #  Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Build your Vite website
+      #  Build your Vite website
       - name: Build website
         run: npm run build
 
-      # 5️⃣ Deploy via FTP (optional step — will only work if vars and secrets are set in GitHub)
+      # Deploy via FTPS to Simply.com
       - name: FTP delivery
         if: success()
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
@@ -37,12 +37,12 @@ jobs:
           server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/todo/
+          server-dir: /public_html/todo/
           local-dir: dist/
+          protocol: ftps
+          port: 21
+          timeout: 60000
 
-      # 6️⃣ Run TestCafe tests
+      # Run TestCafe tests
       - name: Run TestCafe Tests
         run: npx testcafe "chrome" "test/*.js"
-
-        # Triggering new workflow run
-
