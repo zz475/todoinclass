@@ -7,28 +7,31 @@ on:
 
 jobs:
   integration-delivery:
-    # NOTICE: We're no longer running ubuntu latest, since it has some issues with TestCafe. We have degraded to version 22.04 instead.
     runs-on: ubuntu-22.04
     environment: Test
 
     steps:
+      # 1️⃣ Checkout your repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Node.js environment
+      # 2️⃣ Setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: 18
 
+      # 3️⃣ Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
+      # 4️⃣ Build your Vite website
       - name: Build website
         run: npm run build
 
-      # FTP deploy step
+      # 5️⃣ Deploy via FTP (optional step — will only work if vars and secrets are set in GitHub)
       - name: FTP delivery
+        if: success()
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ vars.FTP_SERVER }}
@@ -37,8 +40,6 @@ jobs:
           server-dir: public_html/todo/
           local-dir: dist/
 
-      # Run TestCafe tests
+      # 6️⃣ Run TestCafe tests
       - name: Run TestCafe Tests
-        uses: DevExpress/testcafe-action@latest
-        with:
-          args: "chrome test/*"
+        run: npx testcafe "chrome" "test/*.js"
