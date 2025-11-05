@@ -10,34 +10,27 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # 1. Checkout your code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4. Build the Vite app
       - name: Build website
         run: npm run build
 
-      # 5. Deploy to Simply.com via SFTP (using SSH key)
       - name: Deploy to Simply.com
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: linux398.unoeuro.com
           username: zararawashdeh.dk
           port: 22
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: dist/*
           remote_path: /public_html/
-          sftp_only: true
-
 
